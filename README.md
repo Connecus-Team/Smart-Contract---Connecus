@@ -1,2 +1,2 @@
-# Smart-Contract---Connecus
+# Smart-Contract-Connecus
 VBI Smart Contract With Connecus

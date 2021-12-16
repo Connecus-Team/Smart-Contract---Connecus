@@ -19,6 +19,7 @@ contract ApetasticERC20Factory is Voting, Funding {
     address[] public allTokens;
 
     mapping (address => bool) _checkStaking;
+    mapping (address => bool) _checkCreateToken; 
 
     event TokenCreated(address indexed tokenAddress, uint256 startingSupply);
     event TransferBeneficiary(address indexed oldBeneficiary, address indexed beneficiary);
@@ -40,9 +41,12 @@ contract ApetasticERC20Factory is Voting, Funding {
     function stakingAndFunding(uint256 _id,uint256 _totalSupply,uint256 _timeEnd) external nonReentrant {
         if(token.balanceOf(_msgSender()) < (_totalSupply/3))
             revert("you need to have at least 1/3 of the amount to staking");
+        if(_checkCreateToken[_msgSender()] == false)
+            revert("you haven't created Fan token yet, create to do this");
         token.safeTransferFrom(_msgSender(), address(this), (_totalSupply/3) * 10 ** 18);
         _register(_id,_totalSupply,_timeEnd);
     }
+
     // task bib funding
     function bidFunding(uint256 _id,uint256 _fee) external nonReentrant {
         if(token.balanceOf(_msgSender()) < _fee)
@@ -57,6 +61,7 @@ contract ApetasticERC20Factory is Voting, Funding {
     function createToken(string memory name, string memory symbol, uint256 supply) external returns (address) {
         ApetasticERC20 token_ = new ApetasticERC20(name, symbol, msg.sender, supply);
         allTokens.push(address(token_));
+        _checkCreateToken[_msgSender()] = true;
         emit TokenCreated(address(token_), supply);
         return address(token_);
     } 

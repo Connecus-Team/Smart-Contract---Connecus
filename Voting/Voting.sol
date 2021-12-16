@@ -10,11 +10,11 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract Voting is  ReentrancyGuard, Context{
 
-    event NewVote(uint256 id,string tile,uint256 sumOption);
+    event NewVote(uint256 id,uint256 sumOption,uint256 timeVoteEnd);
     struct infoVote{
-        string title;
         address chairPerson;
         uint256 sumOption;
+        uint256 timeVoteEnd;
         mapping (address => bool) checkPresonVote;
         mapping (uint256 => address[]) Option;
     }
@@ -22,15 +22,17 @@ contract Voting is  ReentrancyGuard, Context{
     mapping (uint256 => infoVote) public VoteToOwer;
     mapping (address => uint) ownerVoteCount;
 
-    function CreateVote(uint256 _id,string memory _tile,uint256 _sumOption) public {
+    function CreateVote(uint256 _id,uint256 _sumOption,uint256 _timeEnd) external nonReentrant {
         infoVote storage _in = VoteToOwer[_id];
-        _in.title = _tile;
         _in.chairPerson = _msgSender();
         _in.sumOption = _sumOption;
-        emit NewVote(_id,_tile,_sumOption);
+        _in.timeVoteEnd = _timeEnd;
+        emit NewVote(_id,_sumOption,_timeEnd);
     }
 
-    function PersonVote(uint256 _id,uint256 _idOption) public {
+    function PersonVote(uint256 _id,uint256 _idOption) external nonReentrant {
+        if (block.timestamp > VoteToOwer[_id].timeVoteEnd )
+            revert("Voting time out");
         infoVote storage _in = VoteToOwer[_id];
         require(_in.checkPresonVote[_msgSender()] == false, "you only vote once");
         _in.Option[_idOption].push(_msgSender());
@@ -38,3 +40,4 @@ contract Voting is  ReentrancyGuard, Context{
     }
 
 }
+

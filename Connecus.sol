@@ -49,10 +49,10 @@ contract ApetasticERC20Factory is Voting, Funding {
             revert("your token is not enough");
         if(block.timestamp > fundToOwer[_id].timeEndFund)
             revert("funding time out");
-        token.safeTransferFrom(_msgSender(), address(this), _fee);
+        token.safeTransferFrom(_msgSender(), fundToOwer[_id].chairPerson, _fee);
         _bib(_id, _fee);
     }
-    
+
     // task create token 
     function createToken(string memory name, string memory symbol, uint256 supply) external returns (address) {
         ApetasticERC20 token_ = new ApetasticERC20(name, symbol, msg.sender, supply);

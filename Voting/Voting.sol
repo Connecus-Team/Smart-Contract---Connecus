@@ -22,7 +22,7 @@ contract Voting is  ReentrancyGuard, Context{
     mapping (uint256 => infoVote) public VoteToOwer;
     mapping (address => uint) ownerVoteCount;
 
-    function _createVote(uint256 _id,string memory _tile,uint256 _sumOption) public {
+    function CreateVote(uint256 _id,string memory _tile,uint256 _sumOption) public {
         infoVote storage _in = VoteToOwer[_id];
         _in.title = _tile;
         _in.chairPerson = _msgSender();
@@ -30,7 +30,7 @@ contract Voting is  ReentrancyGuard, Context{
         emit NewVote(_id,_tile,_sumOption);
     }
 
-    function _PersonVote(uint256 _id,uint256 _idOption) public {
+    function PersonVote(uint256 _id,uint256 _idOption) public {
         infoVote storage _in = VoteToOwer[_id];
         require(_in.checkPresonVote[_msgSender()] == false, "you only vote once");
         _in.Option[_idOption].push(_msgSender());
@@ -38,4 +38,3 @@ contract Voting is  ReentrancyGuard, Context{
     }
 
 }
-

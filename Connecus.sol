@@ -3,8 +3,8 @@
 pragma solidity >=0.7.8;
 
 import "./ApetasticERC20.sol";
-import "./Voting/Voting.sol";
-import "./Funding/Funding.sol";
+import "./Voting.sol";
+import "./Funding.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -35,17 +35,33 @@ contract ApetasticERC20Factory is Voting, Funding {
     function allTokensLength() external view returns (uint) {
         return allTokens.length;
     }
-    // task create Voting
 
+    // task staking funding , Before calling the function must APPROVE
+    function stakingAndFunding(uint256 _id,uint256 _totalSupply,uint256 _timeEnd) external nonReentrant {
+        if(token.balanceOf(_msgSender()) < (_totalSupply/3))
+            revert("you need to have at least 1/3 of the amount to staking");
+        token.safeTransferFrom(_msgSender(), address(this), (_totalSupply/3) * 10 ** 18);
+        _register(_id,_totalSupply,_timeEnd);
+    }
+    // task bib funding
+    function bidFunding(uint256 _id,uint256 _fee) external nonReentrant {
+        if(token.balanceOf(_msgSender()) < _fee)
+            revert("your token is not enough");
+        if(block.timestamp > fundToOwer[_id].timeEndFund)
+            revert("funding time out");
+        token.safeTransferFrom(_msgSender(), address(this), _fee);
+        _bib(_id, _fee);
+    }
+    
     // task create token 
     function createToken(string memory name, string memory symbol, uint256 supply) external returns (address) {
         ApetasticERC20 token_ = new ApetasticERC20(name, symbol, msg.sender, supply);
         allTokens.push(address(token_));
         emit TokenCreated(address(token_), supply);
         return address(token_);
-    }
+    } 
 
-    // Task staking
+    // task staking , Before calling the function must APPROVE
     function staking(uint256 fee_) external nonReentrant {
         token.safeTransferFrom(_msgSender(), address(this), fee_ * 10 ** 18);
         _checkStaking[_msgSender()] = true;

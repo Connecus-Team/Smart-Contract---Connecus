@@ -32,6 +32,47 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_tile",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_sumOption",
+				"type": "uint256"
+			}
+		],
+		"name": "CreateVote",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_idOption",
+				"type": "uint256"
+			}
+		],
+		"name": "PersonVote",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "fee_",
 				"type": "uint256"
 			}
@@ -51,6 +92,31 @@
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "tile",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "sumOption",
+				"type": "uint256"
+			}
+		],
+		"name": "NewVote",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -181,6 +247,35 @@
 				"internalType": "contract IERC20",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "VoteToOwer",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "chairPerson",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sumOption",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

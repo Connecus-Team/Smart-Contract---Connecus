@@ -1,6 +1,7 @@
 # Smart-Contract-Connecus
 VBI Smart Contract With Connecus
 
+    * Mạng Test Net sử dụng : https://ropsten.etherscan.io/
 ## Các chức năng: 
 
 - Token CEUS: 

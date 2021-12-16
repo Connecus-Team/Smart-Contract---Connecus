@@ -21,3 +21,7 @@ VBI Smart Contract With Connecus
             - Chức Năng: 
             - Truyền vào: 
             - return:
+
+![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Voting/Voting.png)
+<br>
+![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Funding/Funding.png)

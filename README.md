@@ -9,13 +9,13 @@ VBI Smart Contract With Connecus
     + [ABI ERC20 CEUS](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/ABIERC20.json)
 
 - Contract Connecus: (Factory Token, Staking,Voting, ...)
-    + address: 0xCA30FC683bCF440EAD9D5261eC7FF3af3b814d14
+    + address: 0xe4736C470737E6205dc439feED0C8944a69e6001
     + [ABI Contract]( https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/AbiConnecus.json)
 
     - Các chức năng:
         + Hàm createToken(string name, string symbol, uint256 supply):
-            - Chức Năng: 
-            - Truyền vào: 
+            - Chức Năng: Tạo Token Fan
+            - Truyền vào: Tên Token, kí hiệu token, tổng phát hành 
             - return: 
         + Hàm staking(uint256 fee_):
             - Chức Năng: 

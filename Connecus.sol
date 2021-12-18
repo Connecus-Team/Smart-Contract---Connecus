@@ -15,12 +15,16 @@ contract ApetasticERC20Factory is Voting, Funding {
     using SafeERC20 for IERC20;
     IERC20 public immutable token;
 
+    struct PerSon{
+        address[] listToken;
+        uint256 sumMoney;       
+    }
     address public beneficiary;
     address[] public allTokens;
 
     mapping (address => bool) _checkStaking;
     mapping (address => bool) _checkCreateToken; 
-
+    mapping (address => PerSon) _persons;
     event TokenCreated(address indexed tokenAddress, uint256 startingSupply);
     event TransferBeneficiary(address indexed oldBeneficiary, address indexed beneficiary);
     event SweepToken(IERC20 indexed token, address indexed beneficiary, uint256 balance);
@@ -36,7 +40,22 @@ contract ApetasticERC20Factory is Voting, Funding {
     function allTokensLength() external view returns (uint) {
         return allTokens.length;
     }
-
+    // task free token
+    function freeToken() external nonReentrant {
+        if(_persons[_msgSender()].sumMoney > 10000)
+            revert("You have requested more than the allowed amount");
+        token.safeTransfer(_msgSender(),1000 * 10 **18);
+        _persons[_msgSender()].sumMoney += 1000;
+    }
+    // task buy token fan
+    function buyTokenFan(address token_,uint256 fee_) public nonReentrant{
+        if(token.balanceOf(_msgSender()) < fee_)
+            revert("not enough money to buy ");
+        IERC20 token__;
+        token__ = IERC20(address(token_));
+        token__.safeTransfer(_msgSender(),fee_ * 10 **18);
+        token.safeTransferFrom(_msgSender(), address(this), fee_ * 10 ** 18);
+    } 
     // task staking funding , Before calling the function must APPROVE
     function stakingAndFunding(uint256 _id,uint256 _totalSupply,uint256 _timeEnd) external nonReentrant {
         if(token.balanceOf(_msgSender()) < (_totalSupply/3))
@@ -59,12 +78,13 @@ contract ApetasticERC20Factory is Voting, Funding {
 
     // task create token 
     function createToken(string memory name, string memory symbol, uint256 supply) external returns (address) {
-        // if (_checkStaking[_msgSender()] == false)
-        //     revert("you haven't staking, please staking then try again");
+        if (_checkStaking[_msgSender()] == false)
+            revert("you haven't staking, please staking then try again");
         // if (_checkCreateToken[_msgSender()] == true)
         //     revert("you can only create 1 fan token");
         ApetasticERC20 token_ = new ApetasticERC20(name, symbol, address(this), supply * 2);
         allTokens.push(address(token_));
+        _persons[_msgSender()].listToken.push(address(token_));
         IERC20 token__;
         token__ = IERC20(address(token_));
         token__.safeTransfer(_msgSender(),supply * 10 **18);

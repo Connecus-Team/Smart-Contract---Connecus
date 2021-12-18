@@ -17,6 +17,7 @@ contract Funding is ReentrancyGuard, Context{
         uint256 totalSupply;
         uint256 timeEndFund;
         address[] presonFund;
+        mapping(address => uint256) sumPersonFund;
     }
     event NewFunding(uint256 id,uint256 totalSupply,uint256 timeEndFund);
 
@@ -35,7 +36,20 @@ contract Funding is ReentrancyGuard, Context{
         infoFunding storage _in = fundToOwer[_id];
         _in.totalFundPerson += _fee;
         _in.presonFund.push(_msgSender());
+        _in.sumPersonFund[_msgSender()] += _fee;
     }
 
+    function getChairPersonFunding(uint256 _id) public view returns(address){
+        return fundToOwer[_id].chairPerson;
+    }
+    function getTotalFundPerson(uint256 _id) public view returns(uint256){
+        return fundToOwer[_id].totalFundPerson;
+    }
+    function getPresonFund(uint256 _id) public view returns(address [] memory){
+        return fundToOwer[_id].presonFund;
+    }
+    function getSumMoneyPresonFund(uint256 _id) public view returns(uint256){
+        return fundToOwer[_id].sumPersonFund[_msgSender()];
+    }
 }
 

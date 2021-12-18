@@ -9,7 +9,7 @@ VBI Smart Contract With Connecus
     + [ABI ERC20 CEUS](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/ABIERC20.json)
 
 - Contract Connecus: (Factory Token, Staking,Voting, ...)
-    + address: 0x260101c6d3AE0a07F85Ed933A1B44F510E22C12B
+    + address: 0xCA30FC683bCF440EAD9D5261eC7FF3af3b814d14
     + [ABI Contract]( https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/AbiConnecus.json)
 
     - Các chức năng:

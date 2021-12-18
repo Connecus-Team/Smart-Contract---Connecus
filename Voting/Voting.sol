@@ -11,6 +11,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Voting is  ReentrancyGuard, Context{
 
     event NewVote(uint256 id,uint256 sumOption,uint256 timeVoteEnd);
+
     struct infoVote{
         address chairPerson;
         uint256 sumOption;
@@ -39,5 +40,12 @@ contract Voting is  ReentrancyGuard, Context{
         _in.checkPresonVote[_msgSender()] = true;
     }
 
+    function getChairPerson(uint256 _id) public view returns(address){
+        return VoteToOwer[_id].chairPerson;
+    }
+
+    function getOption(uint256 _id,uint256 _option) public view returns(address[] memory){
+        return VoteToOwer[_id].Option[_option];
+    }
 }
 

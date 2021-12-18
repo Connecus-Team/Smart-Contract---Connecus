@@ -14,6 +14,9 @@ VBI Smart Contract With Connecus
 
 - [Voting](https://github.com/Connecus-Team/Smart-Contract-Connecus/tree/main/Voting)
 ![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Voting/Voting.png)
+
 <br>
+
 - [Funding](https://github.com/Connecus-Team/Smart-Contract-Connecus/tree/main/Funding)
+
 ![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Funding/Funding.png)

@@ -29,3 +29,12 @@ VBI Smart Contract With Connecus
 - [Funding](https://github.com/Connecus-Team/Smart-Contract-Connecus/tree/main/Funding)
 
 ![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Funding/Funding.png)
+
+## Test các chức năng:
+
+- Test trên : https://remix.ethereum.org/
+
+    + Cấu Trúc folder: 
+![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/image/hackerthon.png)
+
+- Các bước deloy:

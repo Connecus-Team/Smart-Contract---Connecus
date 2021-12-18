@@ -39,16 +39,25 @@ contract Voting is  ReentrancyGuard, Context{
         _in.Option[_idOption].push(_msgSender());
         _in.checkPresonVote[_msgSender()] = true;
     }
-
+    // địa chỉ người gọi vốn
     function getChairPerson(uint256 _id) public view returns(address){
         return VoteToOwer[_id].chairPerson;
     }
-
-    function getOption(uint256 _id,uint256 _option) public view returns(address[] memory){
-        return VoteToOwer[_id].Option[_option];
+    // tổng số option tại id.
+    function getSumOptionVote(uint256 _id) public view returns(uint256){
+        return VoteToOwer[_id].sumOption;
     }
+    // return tất cả địa chỉ và tổng số người chọn option truyền vào 
+    function getOption(uint256 _id,uint256 _option) public view returns(address[] memory,uint256){
+        return (VoteToOwer[_id].Option[_option],VoteToOwer[_id].Option[_option].length);
+    }
+    // check coi người gọi đến đã vote tại id này hay chưa 
     function getCheckVote(uint256 _id) public view returns(bool){
         return VoteToOwer[_id].checkPresonVote[_msgSender()];
+    }
+    // thời gian hết hạn vote
+    function getTimeEndVote(uint256 _id) public view returns(uint256){
+        return VoteToOwer[_id].timeVoteEnd;
     }
 }
 

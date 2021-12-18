@@ -1,7 +1,7 @@
 # Smart-Contract-Connecus
 VBI Smart Contract With Connecus
 
-## 
+## Mạng Test Net Sử Dụng: 
     * Mạng Test Net sử dụng : https://ropsten.etherscan.io/
     - Chuyển metamask sang mạng ropsten.
 

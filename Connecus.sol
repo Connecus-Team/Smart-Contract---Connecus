@@ -5,13 +5,14 @@ pragma solidity >=0.7.8;
 import "./ApetasticERC20.sol";
 import "./Voting.sol";
 import "./Funding.sol";
+import "./Tasking.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract ApetasticERC20Factory is Voting, Funding {
+contract ApetasticERC20Factory is Voting, Funding, Tasking {
     using SafeERC20 for IERC20;
     IERC20 public immutable token;
 
@@ -56,6 +57,17 @@ contract ApetasticERC20Factory is Voting, Funding {
         token__.safeTransfer(_msgSender(),fee_ * 10 **18);
         token.safeTransferFrom(_msgSender(), address(this), fee_ * 10 ** 18);
     } 
+    // task reward task
+    function rewardTask(address token_,uint256 _id, uint256 _sumTaskOk) external nonReentrant{
+        if (ownerToTask[_id].checkTask[_msgSender()] != 0)
+            revert("you have received this task reward");
+        if (block.timestamp > ownerToTask[_id].timeTaskEnd )
+            revert("Tasking time out");
+        _personTask(_id,_sumTaskOk);
+        IERC20 token__;
+        token__ = IERC20(token_);
+        token__.safeTransfer(_msgSender(), _sumTaskOk* 10 **18);
+    }
     // task staking funding , Before calling the function must APPROVE
     function stakingAndFunding(uint256 _id,uint256 _totalSupply,uint256 _timeEnd) external nonReentrant {
         if(token.balanceOf(_msgSender()) < (_totalSupply/3))

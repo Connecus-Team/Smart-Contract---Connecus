@@ -47,6 +47,31 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "sumTask",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timeTaskEnd",
+				"type": "uint256"
+			}
+		],
+		"name": "NewTask",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "sumOption",
 				"type": "uint256"
 			},
@@ -122,6 +147,29 @@
 		],
 		"name": "TransferBeneficiary",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_sumTask",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_timeEnd",
+				"type": "uint256"
+			}
+		],
+		"name": "CreateTask",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -551,6 +599,25 @@
 				"type": "uint256"
 			}
 		],
+		"name": "getTimeTaskEnd",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
 		"name": "getTotalFundPerson",
 		"outputs": [
 			{
@@ -560,6 +627,63 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "ownerToTask",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "chairPerson",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "sumTask",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timeTaskEnd",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "totalReward",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token_",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_sumTaskOk",
+				"type": "uint256"
+			}
+		],
+		"name": "rewardTask",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

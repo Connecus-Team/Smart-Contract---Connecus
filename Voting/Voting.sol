@@ -47,5 +47,8 @@ contract Voting is  ReentrancyGuard, Context{
     function getOption(uint256 _id,uint256 _option) public view returns(address[] memory){
         return VoteToOwer[_id].Option[_option];
     }
+    function getCheckVote(uint256 _id) public view returns(bool){
+        return VoteToOwer[_id].checkPresonVote[_msgSender()];
+    }
 }
 

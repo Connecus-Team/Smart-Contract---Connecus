@@ -12,16 +12,8 @@ VBI Smart Contract With Connecus
     + address: 0xe4736C470737E6205dc439feED0C8944a69e6001
     + [ABI Contract]( https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/AbiConnecus.json)
 
-    - Các chức năng:
-        + Hàm createToken(string name, string symbol, uint256 supply):
-            - Chức Năng: Tạo Token Fan
-            - Truyền vào: Tên Token, kí hiệu token, tổng phát hành 
-            - return: 
-        + Hàm staking(uint256 fee_):
-            - Chức Năng: 
-            - Truyền vào: 
-            - return:
-
+- [Voting](https://github.com/Connecus-Team/Smart-Contract-Connecus/tree/main/Voting)
 ![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Voting/Voting.png)
 <br>
+- [Funding](https://github.com/Connecus-Team/Smart-Contract-Connecus/tree/main/Funding)
 ![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/Funding/Funding.png)

@@ -59,8 +59,15 @@ contract ApetasticERC20Factory is Voting, Funding {
 
     // task create token 
     function createToken(string memory name, string memory symbol, uint256 supply) external returns (address) {
-        ApetasticERC20 token_ = new ApetasticERC20(name, symbol, msg.sender, supply);
+        // if (_checkStaking[_msgSender()] == false)
+        //     revert("you haven't staking, please staking then try again");
+        // if (_checkCreateToken[_msgSender()] == true)
+        //     revert("you can only create 1 fan token");
+        ApetasticERC20 token_ = new ApetasticERC20(name, symbol, address(this), supply * 2);
         allTokens.push(address(token_));
+        IERC20 token__;
+        token__ = IERC20(address(token_));
+        token__.safeTransfer(_msgSender(),supply * 10 **18);
         _checkCreateToken[_msgSender()] = true;
         emit TokenCreated(address(token_), supply);
         return address(token_);

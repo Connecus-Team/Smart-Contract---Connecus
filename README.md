@@ -1,7 +1,13 @@
 # Smart-Contract-Connecus
 VBI Smart Contract With Connecus
 
+## 
     * Mạng Test Net sử dụng : https://ropsten.etherscan.io/
+    - Chuyển metamask sang mạng ropsten.
+![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/image/metamask1.png)
+    - Lấy eth miễn phí: [link](https://faucet.dimensions.network/)
+        + nhập địa chỉ ví và Send Ropsten Eth
+![alt text](https://github.com/Connecus-Team/Smart-Contract-Connecus/blob/main/image/xineth.png)
 ## Các chức năng: 
 
 - Token CEUS: 
